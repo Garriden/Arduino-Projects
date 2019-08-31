@@ -7,7 +7,7 @@ int D = 0;
 int ii;
 
 void setup() {
-  Serial.begin(9600);
+  //Serial.begin(9600);
   pinMode(TRIG_PIN_, OUTPUT);
   pinMode(ECHO_PIN_, INPUT);
   pinMode(BUZZER_PIN_, OUTPUT);
