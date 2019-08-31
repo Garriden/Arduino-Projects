@@ -1,15 +1,15 @@
-## Arduino-Projects
+# Arduino-Projects
 Differents projects I made with Arduino.
 
 
-# SdAccelerometer
+## SdAccelerometer
 One of the firsts projects, in arduino DUE, read some accelerometer and communicate with an SD card.
 
-# Alcoholimeter
+## Alcoholimeter
 A portable alcoholimeter with history record.
 
-# Calavera
+## Calavera
 A skull which looks at you.
 
-# Parking sensor
+## Parking sensor
 It beeps faster when you are close to the next car while parking.
