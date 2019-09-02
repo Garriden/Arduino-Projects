@@ -1,16 +1,21 @@
+#include <Wire.h>
+#include <VL53L0X.h>
+
+VL53L0X sensor;
 
 const int BUZZER_PIN_ = 8;
-const int TRIG_PIN_ = 4;
-const int ECHO_PIN_ = 5;
-
-int D = 0;
+int D = 1000;
 int ii;
 
 void setup() {
-  //Serial.begin(9600);
-  pinMode(TRIG_PIN_, OUTPUT);
-  pinMode(ECHO_PIN_, INPUT);
   pinMode(BUZZER_PIN_, OUTPUT);
+
+  Serial.begin(9600);
+  Wire.begin();
+
+  sensor.init();
+  sensor.setTimeout(500);
+  sensor.startContinuous();  
   delay(100);
 }
 
@@ -18,33 +23,25 @@ void setup() {
 void loop() {
   get_distance();
   beep();
-  //Serial.println(D);
 }
 
 void beep() {
-  D = clamp(D, 1, 100);
-  if(D > 3) {
-    delay(D * 10);
+  D = clamp(D, 1, 1000);
+  if(D > 30) {
+    delay(D);
   }
-    Serial.println(D);
-    for(ii = 0; ii < 50; ++ii) {
-      digitalWrite(BUZZER_PIN_, HIGH); 
-      delay(1);
-      digitalWrite(BUZZER_PIN_, LOW);
-      delay(1);    
-    }
+  for(ii = 0; ii < 50; ++ii) {
+    digitalWrite(BUZZER_PIN_, HIGH); 
+    delay(1);
+    digitalWrite(BUZZER_PIN_, LOW);
+    delay(1);    
+  }
 }
 
 void get_distance() {
-  digitalWrite(TRIG_PIN_,LOW);
-  delayMicroseconds(5);
-  
-  digitalWrite(TRIG_PIN_, HIGH);
-  delayMicroseconds(10);
-  
-  int dist_aux = int(0.017 *  pulseIn(ECHO_PIN_, HIGH));
+  int distance = sensor.readRangeContinuousMillimeters();
 
-  D = (D * 0.5) + (dist_aux * 0.5) ;  
+  D = (D * 0.5) + (distance * 0.5);
 }
 
 int clamp(int value, int min_, int max_) {
