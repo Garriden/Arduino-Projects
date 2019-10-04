@@ -1,3 +1,10 @@
+// TODO:
+//
+// Continus beep some centimeters before. Now when you hear the continuous beep, you already touched.
+// Buy and install a bigger buzzer.
+// Test and find the best "sleeping" value without receiving noise. 
+// Substitute Sleep() for a simulated reading thread.
+
 #include <Wire.h>
 #include <VL53L0X.h>
 
